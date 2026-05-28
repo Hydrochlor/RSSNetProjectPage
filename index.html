@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <!-- TODO: Replace with your paper title and author names -->
+  <meta name="title" content="A Brain-Inspired Deep Separation Network for Single Channel Raman Spectra Unmixing - Gaoruishu Long, Jinchao Liu, Bo Liu, Jie Liu, Xiaolin Hu">
+  <!-- TODO: Write a compelling 150-160 character description of your research -->
+  <meta name="description" content="Raman spectra obtained in real world applications are often a noisy combination of several spectra of various substances in a tested sample. Unmixing such spectra into individual components corresponding to each of the substances is of great value and has been a longstanding challenge in Raman spectroscopy.  
+  Existing unmixing methods are predominantly designed to invert an overdetermined mixed model and therefore require multiple mixed spectra as input. However, open domain and/or non-cooperative detection applications in Raman spectroscopy such as controlled substance detection, call for single-channel solutions which can identify individual components from thousands of candidates by analyzing only a single noisy mixed spectrum. To our knowledge, sparse regression is the only existing solution which can cope with this scenario, yet it has very low tolerance to noises and can hardly be applicable in practice. 
+  To address these limitations, we introduce a novel neural approach for single-channel Raman spectrum unmixing inspired by speech separation. It aims at solving underdetermined systems and can decompose a noisy mixed spectrum from a library of thousands of components (substances). The core of our method is a deep separation neural network (RSSNet) which takes a mixed spectrum as input and outputs spectra of pure components. 
+  We created two synthetic datasets of single-channel Raman spectra unmixing and demonstrated feasibility and superiority of RSSNet on these datasets (outperform competing methods by >4dB). Furthermore, we verified that RSSNet, trained solely on synthetic data, can successfully unmix real-world mixed spectra of mixtures of mineral powders, exhibiting strong generalization.
+  Our approach represents a new paradigm for Raman unmixing and enables new possibilities for fast detection of Raman mixtures.">
+  <!-- TODO: Add 5-10 relevant keywords for your research area -->
+  <meta name="keywords" content="Blind Source Separation, Brain-Inspired Computing, Raman Spectroscopy, Signal Processing">
+  <!-- TODO: List all authors -->
+  <meta name="author" content="Gaoruishu Long, Jinchao Liu, Bo Liu, Jie Liu, Xiaolin Hu">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <!-- TODO: Replace with your institution or lab name -->
+  <meta property="og:site_name" content="College of Artifical Intelligence, Nankai University">
+  <!-- TODO: Same as paper title above -->
+  <meta property="og:title" content="A Brain-Inspired Deep Separation Network for Single Channel Raman Spectra Unmixing">
+  <!-- TODO: Same as description above -->
+  <meta property="og:description" content="A novel deep separation network (RSSNet) based on the Encoder-Separator-Decoder paradigm for solving the single-channel Raman spectra unmixing problem.">
+  <!-- TODO: Replace with your actual website URL -->
+  <meta property="og:url" content="https://hydrochlor.github.io/RSSNetProjectPage/">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta property="og:image" content="https://hydrochlor.github.io/RSSNetProjectPage/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A Brain-Inspired Deep Separation Network for Single Channel Raman Spectra Unmixing - Research Preview">
+  <meta property="article:published_time" content="2026-04-24T00:00:00.000Z">
+  <meta property="article:author" content="Gaoruishu Long">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="Blind Source Separation">
+  <meta property="article:tag" content="Brain-Inspired Computing">
+  <meta property="article:tag" content="Raman Spectroscopy">
+  <meta property="article:tag" content="Signal Processing">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- TODO: Replace with your lab/institution Twitter handle -->
+  <!-- <meta name="twitter:site" content="@NankaiUniversity"> -->
+  <!-- TODO: Replace with first author's Twitter handle -->
+  <!-- <meta name="twitter:creator" content="@GaoruishuLong"> -->
+  <!-- TODO: Same as paper title above -->
+  <meta name="twitter:title" content="A Brain-Inspired Deep Separation Network for Single Channel Raman Spectra Unmixing - Research Preview">
+  <!-- TODO: Same as description above -->
+  <meta name="twitter:description" content="A novel deep separation network (RSSNet) based on the Encoder-Separator-Decoder paradigm for solving the single-channel Raman spectra unmixing problem.">
+  <!-- TODO: Same as social preview image above -->
+  <meta name="twitter:image" content="https://hydrochlor.github.io/RSSNetProjectPage/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="A Brain-Inspired Deep Separation Network for Single Channel Raman Spectra Unmixing - Research Preview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="A Brain-Inspired Deep Separation Network for Single Channel Raman Spectra Unmixing">
+  <meta name="citation_author" content="Gaoruishu, Long">
+  <meta name="citation_author" content="Jinchao, Liu">
+  <meta name="citation_author" content="Bo, Liu">
+  <meta name="citation_author" content="Jie, Liu">
+  <meta name="citation_author" content="Xiaolin, Hu">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="2026 International Joint Conference on Neural Networks (IJCNN)">
+  <meta name="citation_pdf_url" content="https://hydrochlor.github.io/RSSNetProjectPage/static/pdfs/arxivpaper.pdf">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <!-- TODO: Replace with your paper title and authors -->
+  <title>A Brain-Inspired Deep Separation Network for Single Channel Raman Spectra Unmixing - Long et al. | Academic Research</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "A Brain-Inspired Deep Separation Network for Single Channel Raman Spectra Unmixing",
+    "description": "A novel deep separation network (RSSNet) based on the Encoder-Separator-Decoder paradigm for solving the single-channel Raman spectra unmixing problem.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Gaoruishu Long",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "College of Artifical Intelligence, Nankai University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Jinchao Liu",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "College of Artifical Intelligence, Nankai University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Bo Liu",
+        "affiliation": [
+          {
+            "@type": "Organization",
+            "name": "Guangdong Laboratory of Chemistry and Fine Chemical Industry"
+          },
+          {
+            "@type": "Organization",
+            "name": "Smekal Tech (Shantou) Ltd."
+          }
+        ]
+      },
+      {
+        "@type": "Person",
+        "name": "Jie Liu",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "College of Artifical Intelligence, Nankai University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Xiaolin Hu",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Department of Computer Science and Technology, TsingHua University"
+        }
+      }
+    ],
+    "datePublished": "2026-04-24",
+    "publisher": {
+      "@type": "Organization",
+      "name": "2026 International Joint Conference on Neural Networks (IJCNN)"
+    },
+    "url": "https://hydrochlor.github.io/RSSNetProjectPage/",
+    "image": "https://hydrochlor.github.io/RSSNetProjectPage/static/images/social_preview.png",
+    "keywords": ["Blind Source Separation", "Brain-Inspired Computing", "Raman Spectroscopy", "Signal Processing"],
+    "abstract": "Raman spectra obtained in real world applications are often a noisy combination of several spectra of various substances in a tested sample. Unmixing such spectra into individual components corresponding to each of the substances is of great value and has been a longstanding challenge in Raman spectroscopy.  
+    Existing unmixing methods are predominantly designed to invert an overdetermined mixed model and therefore require multiple mixed spectra as input. However, open domain and/or non-cooperative detection applications in Raman spectroscopy such as controlled substance detection, call for single-channel solutions which can identify individual components from thousands of candidates by analyzing only a single noisy mixed spectrum. To our knowledge, sparse regression is the only existing solution which can cope with this scenario, yet it has very low tolerance to noises and can hardly be applicable in practice. 
+    To address these limitations, we introduce a novel neural approach for single-channel Raman spectrum unmixing inspired by speech separation. It aims at solving underdetermined systems and can decompose a noisy mixed spectrum from a library of thousands of components (substances). The core of our method is a deep separation neural network (RSSNet) which takes a mixed spectrum as input and outputs spectra of pure components. 
+    We created two synthetic datasets of single-channel Raman spectra unmixing and demonstrated feasibility and superiority of RSSNet on these datasets (outperform competing methods by >4dB). Furthermore, we verified that RSSNet, trained solely on synthetic data, can successfully unmix real-world mixed spectra of mixtures of mineral powders, exhibiting strong generalization.
+    Our approach represents a new paradigm for Raman unmixing and enables new possibilities for fast detection of Raman mixtures.",
+    "citation": "@misc{long2026braininspireddeepseparationnetwork,
+      title={A Brain-Inspired Deep Separation Network for Single Channel Raman Spectra Unmixing}, 
+      author={Gaoruishu Long and Jinchao Liu and Bo Liu and Jie Liu and Xiaolin Hu},
+      year={2026},
+      eprint={2604.22324},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2604.22324}, }",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://hydrochlor.github.io/RSSNetProjectPage/"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Raman Spectroscopy"
+      },
+      {
+        "@type": "Thing", 
+        "name": "Signal Processing"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <!-- <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "INSTITUTION_OR_LAB_NAME",
+    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
+    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script> -->
+  <style>
+    /* 2. 专门为摘要定制的样式（较大，较浅） */
+    .normal-text {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      font-size: 16px !important; /* 字体较小，适合密集阅读 */
+      color: #363636 !important;  /* 颜色较深（深灰色，比纯黑柔和） */
+      line-height: 1.6 !important;
+    }
+  </style>
+ 
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- TODO: Replace with your paper title -->
+            <h1 class="title is-1 publication-title">A Brain-Inspired Deep Separation Network for Single Channel Raman Spectra Unmixing</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- TODO: Replace with your paper authors and their personal links -->
+              <!-- <span class="author-block">
+                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Gaoruishu Long</a><sup>*</sup>,</span>
+                <span class="author-block">
+                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
+                  <span class="author-block">
+                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
+                  </span> -->
+                  <span class="author-block">
+                    <a href="#" target="_blank"><strong>Gaoruishu Long</strong></a><sup>1</sup>,
+                  </span>
+                  <span class="author-block">
+                    <a href="#" target="_blank">Jinchao Liu</a><sup>1,*</sup>,
+                  </span>
+                  <span class="author-block">
+                    <a href="#" target="_blank">Bo Liu</a><sup>2,3</sup>,
+                  </span>
+                  <span class="author-block">
+                    <a href="#" target="_blank">Jie Liu</a><sup>1</sup>,
+                  </span>
+                  <span class="author-block">
+                    <a href="#" target="_blank">Xiaolin Hu</a><sup>4</sup>
+                  </span>
+                  </div>
+
+                  <!-- <div class="is-size-5 publication-authors"> -->
+                    <!-- TODO: Replace with your institution and conference/journal info -->
+                    <!-- <span class="author-block">Institution Name<br>Conference name and year</span> -->
+                    <!-- TODO: Remove this line if no equal contribution -->
+                    <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
+                  <!-- </div> -->
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block" style="display: block; font-size: 0.9em; margin-top: 10px;">
+                      <sup>1</sup>College of Artificial Intelligence, Nankai University, Tianjin, China<br>
+                      <sup>2</sup>Guangdong Laboratory of Chemistry and Fine Chemical Industry, Guangdong, China<br>
+                      <sup>3</sup>Smekal Tech (Shantou) Ltd.<br>
+                      <sup>4</sup>Department of Computer Science and Technology, Tsinghua University, Beijing, China
+                    </span>
+                    
+                    <span class="author-block" style="display: block; margin-top: 15px; font-weight: bold; color: #363636;">
+                      IJCNN 2026 (WCCI) Accepted
+                    </span>
+
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Corresponding author</small></span>
+
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- TODO: Update with your arXiv paper ID -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2604.22324.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                    <!-- TODO: Add your supplementary material PDF or remove this section -->
+                    <!-- <span class="link-block">
+                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span> -->
+
+                  <!-- TODO: Replace with your GitHub repository URL -->
+                  <span class="link-block">
+                    <a href="https://github.com/Hydrochlor/RSSNet" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Datasets</span>
+                  </a>
+                </span>
+
+                <!-- TODO: Update with your arXiv paper ID -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2604.22324" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body"> -->
+      <!-- TODO: Replace with your teaser video -->
+      <!-- <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata"> -->
+        <!-- TODO: Add your video file path here -->
+        <!-- <source src="static/videos/banner_video.mp4" type="video/mp4">
+      </video> -->
+      <!-- TODO: Replace with your video description -->
+      <!-- <h2 class="subtitle has-text-centered">
+        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
+      </h2>
+    </div>
+  </div>
+</section> -->
+<!-- End teaser video -->
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      
+      <img src="static/images/OverallFramwork2.svg" alt="RSSNet Architecture" style="width: 100%; height: auto; border-radius: 8px;">
+      
+      <h2 class="subtitle has-text-centered" style="margin-top: 15px;">
+        <strong>The Encoder-Separator-Decoder architecture of RSSNet.</strong><br> To solve the severely underdetermined unmixing problem, we adapt a speech separation paradigm to spectral analysis. The network blindly decomposes a mixed spectrum by estimating feature-level masks in the latent space, enabling robust reconstruction of pure material signatures even under high noise.
+      </h2>
+      
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your paper abstract -->
+          <p>
+            Raman spectra obtained in real world applications are often a noisy combination of several spectra of various substances in a tested sample. Unmixing such spectra into individual components corresponding to each of the substances is of great value and has been a longstanding challenge in Raman spectroscopy.
+    Existing unmixing methods are predominantly designed to invert an overdetermined mixed model and therefore require multiple mixed spectra as input. However, open domain and/or non-cooperative detection applications in Raman spectroscopy such as controlled substance detection, call for single-channel solutions which can identify individual components from thousands of candidates by analyzing only a single noisy mixed spectrum. To our knowledge, sparse regression is the only existing solution which can cope with this scenario, yet it has very low tolerance to noises and can hardly be applicable in practice.
+    To address these limitations, we introduce a novel neural approach for single-channel Raman spectrum unmixing inspired by speech separation. It aims at solving underdetermined systems and can decompose a noisy mixed spectrum from a library of thousands of components (substances). The core of our method is a deep separation neural network (RSSNet) which takes a mixed spectrum as input and outputs spectra of pure components.
+    We created two synthetic datasets of single-channel Raman spectra unmixing and demonstrated feasibility and superiority of RSSNet on these datasets (outperform competing methods by >4dB). Furthermore, we verified that RSSNet, trained solely on synthetic data, can successfully unmix real-world mixed spectra of mixtures of mineral powders, exhibiting strong generalization.
+    Our approach represents a new paradigm for Raman unmixing and enables new possibilities for fast detection of Raman mixtures.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      
+      <h2 class="title is-3">Neural Separation Mechanism</h2>
+      
+      <div class="columns is-centered">
+        <div class="column is-full">
+          
+          <div class="has-text-centered" style="margin-bottom: 30px;">
+            <img src="static/images/RSSNet_8.svg" alt="Neural Separator Architecture" style="width: 100%; max-width: 900px; border-radius: 8px;">
+          </div>
+
+          <div class="content has-text-justified">
+            <p class="normal-text">
+              The core of our unmixing method lies in the Neural Separator, which employs a sophisticated dual-path design. It processes the encoded latent representation <i>h</i> to estimate highly accurate masks through three main stages:
+            </p>
+            <ul>
+              <li class="normal-text">
+                <strong>Chunking (Sequence Segmentation):</strong> The 1D latent feature sequence <i>h</i> is first segmented into overlapping chunks, reshaping it into a 3D tensor <i>H</i>. This step facilitates efficient local-global feature modeling.
+              </li>
+              <li class="normal-text">
+                <strong>RSSNet Block (Dual-Path Processing):</strong> This block acts as the computational engine and is repeated multiple times. It utilizes an <strong>Intra-TDAModule</strong> to model local spectral dependencies within each individual chunk, and an <strong>Inter-TDAModule</strong> to capture global contextual dependencies across different chunks. Furthermore, Depth-Wise Convolutions (<strong>DWConv</strong>) are strategically integrated into the pathways to extract cross-channel relationships, significantly enhancing the network's modeling capacity.
+              </li>
+              <li class="normal-text">
+                <strong>Overlap-Add & Mask Net:</strong> After the iterative refinement, the Overlap-Add operation effectively reverses the chunking process, reconstructing the chunks back into a continuous feature sequence. Finally, a Mask Net maps these features into component-specific masks (<i>M</i><sub>1</sub> and <i>M</i><sub>2</sub>).
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      
+      <h2 class="title is-3">Bio-Inspired Feature Modulation: The TDA Module</h2>
+      
+      <div class="columns is-vcentered" style="margin-top: 30px;">
+        
+        <div class="column is-7">
+          <div class="content has-text-justified">
+            <p class="normal-text">
+              The architectural design of our RSSNet Block is fundamentally inspired by the Top-Down Attention (TDA) mechanism. 
+            </p>
+            <p class="normal-text">
+              Mimicking the biological top-down attention in the visual and auditory cortex, the TDA module integrates downsampling, a Global Attention (GA) module, and a Local Attention (LA) module to process sequential data effectively. 
+            </p>
+            <p class="normal-text">
+              As illustrated in the figure, it first extracts a global attention signal using the GA module, which refines global features by applying a multi-head attention (MHA) layer and a feed-forward network (FFN) layer. This global context acts as a top-down signal. The LA module then uses this to generate adaptive parameters, progressively refining the feature representations back to the original resolution.
+            </p>
+          </div>
+        </div>
+        
+        <div class="column is-5 has-text-centered">
+          <img src="static/images/TDANet.svg" alt="TDA Module Architecture" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+          <p style="font-size: 0.85em; color: #666; margin-top: 10px;">
+            <em>The architecture of the Top-Down Attention (TDA) module.</em>
+          </p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      
+      <h2 class="title is-3">Unmixing Real-World Mixtures</h2>
+      
+      <div class="columns is-centered" style="margin-top: 20px;">
+        <div class="column is-full">
+          
+          <div class="content has-text-justified">
+            <p class="normal-text">
+              To evaluate our model's real-world applicability, we tested RSSNet on actual physical mixtures of mineral powders, including Orpiment, Microcline, Realgar, Hematite, Phlogopite, and Calcite. The comparison below highlights the robustness of our approach:
+            </p>
+
+          </div>
+
+          <div class="has-text-centered" style="margin-top: 30px; margin-bottom: 20px;">
+            <img src="static/images/realdata_compare_5.svg" alt="Real-world Unmixing Results" style="width: 100%; border-radius: 8px;">
+          </div>
+
+          <div class="content has-text-justified">
+            <p class="normal-text">
+              As shown in the top row, when the pure spectra in the mixture have comparable intensities, the characteristic peaks of both components are clearly visible. In contrast, the bottom row presents a much more challenging scenario where the components differ significantly in magnitude. In these highly unbalanced mixtures, the signal of the minor component exhibits much lower amplitude and is nearly invisible, submerged by the dominant one. 
+            </p>
+            <p class="normal-text">
+              Even under such severe conditions, RSSNet accurately extracts the pure constituent spectra from a single noisy observation. Traditional sparse regression methods (SUnSAL, NNOMP), however, struggle with this physical noise and frequently fail to identify the minor components. This demonstrates RSSNet's exceptional <strong>sim-to-real generalization</strong>.
+            </p>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- Paper poster -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      
+      <h2 class="title is-3">Quantitative Results</h2>
+      
+      <div class="columns is-centered" style="margin-top: 20px;">
+        <div class="column is-full">
+
+          <div class="content has-text-justified">
+            <p class="normal-text">
+              We evaluated RSSNet on two synthetic single-channel unmixing datasets: <strong>RRUFF-2Mix</strong> and <strong>UNIPR-2Mix</strong>. The results demonstrate that RSSNet establishes a new state-of-the-art for this highly underdetermined task.
+            </p>
+          </div>
+
+          <div class="has-text-centered" style="margin-top: 20px;">
+            <img src="static/images/result1.png" alt="Comparison of SI-SNR and SI-SNRi" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+          </div>
+
+          <div class="has-text-centered" style="margin-top: 40px; margin-bottom: 20px;">
+            <img src="static/images/result2.png" alt="Comparison on extended metrics" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+<!--End paper poster -->
+
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@misc{long2026braininspireddeepseparationnetwork,
+  title={A Brain-Inspired Deep Separation Network for Single Channel Raman Spectra Unmixing}, 
+  author={Gaoruishu Long and Jinchao Liu and Bo Liu and Jie Liu and Xiaolin Hu},
+  year={2026},
+  eprint={2604.22324},
+  archivePrefix={arXiv},
+  primaryClass={cs.LG},
+  url={https://arxiv.org/abs/2604.22324}, 
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
